@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Wrapper renders after custom styling 1`] = `ShallowWrapper {}`;
-
-exports[`Wrapper renders the component 1`] = `ShallowWrapper {}`;
