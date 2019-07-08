@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Accordion renders the component 1`] = `ShallowWrapper {}`;
+
+exports[`Accordion should render when an item is expanded 1`] = `ShallowWrapper {}`;
+
+exports[`Accordion should render with multiple items 1`] = `ShallowWrapper {}`;
+
+exports[`Accordion should render with one item 1`] = `ShallowWrapper {}`;

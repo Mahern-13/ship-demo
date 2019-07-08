@@ -1,0 +1,92 @@
+{
+  "name": "shipwell-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --open",
+    "test": "jest --runInBand"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env"
+      ],
+      [
+        "@babel/preset-react"
+      ]
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-transform-arrow-functions"
+      ],
+      [
+        "@babel/transform-runtime"
+      ],
+      [
+        "@babel/plugin-proposal-class-properties"
+      ]
+    ]
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "<rootDir>/config/webpack/test.js"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "bower_components",
+      "shared"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/test/setupTests.js"
+    ],
+    "moduleNameMapper": {
+      "^.+\\.(css|less|scss)$": "<rootDir>/test/styleMock.js"
+    }
+  },
+  "dependencies": {
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "lodash.isequal": "^4.5.0",
+    "node-fetch": "^2.6.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.1.0",
+    "react-router-dom": "^5.0.1",
+    "redux": "^4.0.1",
+    "redux-mock-store": "^1.5.3",
+    "redux-saga": "^1.0.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-transform-arrow-functions": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.5.0",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.4.4",
+    "@babel/runtime": "^7.5.0",
+    "babel-jest": "^24.8.0",
+    "babel-loader": "^8.0.6",
+    "babel-polyfill": "^6.26.0",
+    "css-loader": "^3.0.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^24.8.0",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0",
+    "script-ext-html-webpack-plugin": "^2.1.3",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.35.2",
+    "webpack-cli": "^3.3.5",
+    "webpack-dev-server": "^3.7.2"
+  }
+}

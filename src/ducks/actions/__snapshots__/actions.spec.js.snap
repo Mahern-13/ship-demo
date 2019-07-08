@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`redux actions dispatches createStop and the correct payload 1`] = `
+Array [
+  Object {
+    "stop": Object {
+      "address": "test123",
+      "complete": false,
+      "name": "test",
+    },
+    "type": "CREATE_STOP",
+  },
+]
+`;
+
+exports[`redux actions dispatches deleteStop and the correct payload 1`] = `
+Array [
+  Object {
+    "stop": Object {
+      "id": 1,
+    },
+    "type": "DELETE_STOP",
+  },
+]
+`;
+
+exports[`redux actions dispatches editStopCompletion and the correct payload 1`] = `
+Array [
+  Object {
+    "stop": Object {
+      "complete": true,
+      "id": 1,
+    },
+    "type": "EDIT_STOP_COMPLETION",
+  },
+]
+`;
+
+exports[`redux actions dispatches selectItem and the correct payload 1`] = `
+Array [
+  Object {
+    "activeItem": 1,
+    "stops": Array [
+      1,
+      2,
+    ],
+    "type": "SELECT_ITEM",
+  },
+]
+`;
+
+exports[`redux actions dispatches updateStop and the correct payload 1`] = `
+Array [
+  Object {
+    "stop": Object {
+      "address": "testing123",
+      "id": 2,
+      "name": "testing",
+    },
+    "type": "UPDATE_STOP",
+  },
+]
+`;
+
+exports[`redux actions dispatches verificationReceived and the correct payload 1`] = `
+Array [
+  Object {
+    "response": true,
+    "type": "VERIFICATION_RECEIVED",
+  },
+]
+`;
+
+exports[`redux actions dispatches verificationReceived and the correct payload 2`] = `
+Array [
+  Object {
+    "error": true,
+    "type": "VERIFICATION_FAILED",
+  },
+]
+`;

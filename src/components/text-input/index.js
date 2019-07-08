@@ -1,0 +1,26 @@
+import React, { useState } from "react";
+import "./style.scss";
+
+const TextInput = props => {
+  const [active, setActive] = useState(false);
+  const { id, label, value, onChange, name, disabled } = props;
+  const fieldClassName = `field ${(active || value) && "active"}`;
+  return (
+    <div className={fieldClassName}>
+      <input
+        id={id}
+        type="text"
+        value={value}
+        placeholder={label}
+        disabled={disabled}
+        onChange={onChange}
+        name={name}
+        onFocus={() => setActive(true)}
+        onBlur={() => setActive(false)}
+        {...props}
+      />
+      <label htmlFor={id}>{label}</label>
+    </div>
+  );
+};
+export default TextInput;

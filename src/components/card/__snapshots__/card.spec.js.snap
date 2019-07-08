@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Danger Card renders the component 1`] = `ShallowWrapper {}`;
+
+exports[`Default Card renders the component 1`] = `ShallowWrapper {}`;
+
+exports[`Default Card renders the component without a header 1`] = `ShallowWrapper {}`;
+
+exports[`Primary Card renders the component 1`] = `ShallowWrapper {}`;
+
+exports[`Warning Card renders the component 1`] = `ShallowWrapper {}`;
