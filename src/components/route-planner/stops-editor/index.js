@@ -8,19 +8,37 @@ import AccordionItem from "../../accordian/accordian-item";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import "./style.scss";
 import { setEditingStep, deleteStop } from "../../../ducks/actions";
+import usePrevious from "../../../hooks/usePrevious";
 
 const StopsEditor = () => {
-  const { routes, stops, alert, error, editingStepId } = useSelector(state => {
-    const { stops, routes, alert, error, editingStepId } = state;
-    return {
-      stops,
-      routes,
-      alert,
-      error,
-      editingStepId
-    };
-  }, shallowEqual);
+  const { routes, stops, alert, error, editingStepId, edgeCase } = useSelector(
+    state => {
+      const { stops, routes, alert, error, editingStepId, edgeCase } = state;
+      return {
+        stops,
+        routes,
+        alert,
+        error,
+        editingStepId,
+        edgeCase
+      };
+    },
+    shallowEqual
+  );
   const dispatch = useDispatch();
+  const previousRoutesLength = usePrevious(routes.length);
+
+  useEffect(() => {
+    if (previousRoutesLength < routes.length) {
+      setTimeout(() => {
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          left: 0,
+          behavior: "smooth"
+        });
+      }, 350);
+    }
+  }, [routes.length]);
   const toggleEdit = useCallback(id => {
     dispatch(setEditingStep(id));
   });
@@ -36,7 +54,6 @@ const StopsEditor = () => {
   const _onCancelEdit = () => {
     dispatch(setEditingStep(null));
   };
-
   return (
     <Card
       className="stops-editor"
@@ -59,6 +76,7 @@ const StopsEditor = () => {
                   key={"stops-item-" + `${stopId}`}
                   onEdit={toggleEdit}
                   onDelete={_onDelete}
+                  editingStepId={editingStepId}
                 />
               }
               expanded={editingStepId === stopId}
@@ -71,6 +89,7 @@ const StopsEditor = () => {
                 onDelete={_onDelete}
                 onCancel={_onCancelEdit}
                 editingStepId={editingStepId}
+                edgeCase={edgeCase}
               />
             </AccordionItem>
           );

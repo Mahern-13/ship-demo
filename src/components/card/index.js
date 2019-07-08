@@ -2,13 +2,7 @@ import React from "react";
 import Wrapper from "../wrapper";
 
 import "./style.scss";
-
-export const TYPES = {
-  DEFAULT: "default",
-  PRIMARY: "primary",
-  WARNING: "warning",
-  DANGER: "danger"
-};
+import { TYPES } from "../../consts";
 
 const BaseCard = ({ header, children, cardType }) => (
   <div className={"card " + `card-${cardType || TYPES.default}`}>

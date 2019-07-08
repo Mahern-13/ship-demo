@@ -1,7 +1,7 @@
 import { put, call, all, takeEvery } from "redux-saga/effects";
 import { verifyAddress } from "../../api/stop-api";
 import * as Types from "../types";
-import { createStop, updateStop } from "../actions";
+import { createStop, updateStop, setCreatingStopState } from "../actions";
 
 const withAsync = async fn => {
   try {
@@ -20,9 +20,11 @@ function* initCreateStop({ name, address }) {
     recommendedAddress: "",
     completed: false
   };
+  let edgeCase = false;
   let stopError = null;
   let stopAlert = null;
   try {
+    yield put(setCreatingStopState(true));
     const [response, error] = yield call(withAsync, () =>
       verifyAddress(address)
     );
@@ -32,8 +34,16 @@ function* initCreateStop({ name, address }) {
     } else {
       // Success or warning
       if (response.warnings && response.warnings.length) {
+        const { formatted_address } = response.geocoded_address;
+
+        if (
+          address.slice(0, -9) === formatted_address.slice(0, -9) &&
+          address !== formatted_address
+        ) {
+          edgeCase = true;
+        }
         stopAlert = true;
-        stop.recommendedAddress = response.geocoded_address.formatted_address;
+        stop.recommendedAddress = formatted_address;
       } else {
         stop.verified = true;
       }
@@ -43,17 +53,21 @@ function* initCreateStop({ name, address }) {
       createStop({
         stop,
         stopAlert,
-        stopError
+        stopError,
+        edgeCase
       })
     );
   } catch (err) {
     console.error(err);
+  } finally {
+    yield put(setCreatingStopState(false));
   }
 }
 
 function* initUpdateStop({ stop }) {
   let stopError = null;
   let stopAlert = null;
+  let edgeCase = false;
 
   try {
     const [response, error] = yield call(withAsync, () =>
@@ -67,6 +81,14 @@ function* initUpdateStop({ stop }) {
     } else {
       // Success or warning
       if (response.warnings && response.warnings.length) {
+        const { formatted_address } = response.geocoded_address;
+
+        if (
+          stop.address.slice(0, -9) === formatted_address.slice(0, -9) &&
+          stop.address !== formatted_address
+        ) {
+          edgeCase = true;
+        }
         stopAlert = true;
         stop.recommendedAddress = response.geocoded_address.formatted_address;
         stop.verified = false;
@@ -79,7 +101,8 @@ function* initUpdateStop({ stop }) {
       updateStop({
         stop,
         stopAlert,
-        stopError
+        stopError,
+        edgeCase
       })
     );
   } catch (err) {

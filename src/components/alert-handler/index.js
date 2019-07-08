@@ -6,19 +6,9 @@ import {
   Primary as PrimaryButton,
   Danger as RedButton
 } from "../button";
+import { SIZES, TYPES } from "../../consts";
 
 import "./style.scss";
-
-export const SIZES = {
-  SMALL: "xs",
-  MEDIUM: "sm",
-  LARGE: "lg"
-};
-
-export const TYPES = {
-  WARNING: "warning",
-  DANGER: "danger"
-};
 
 const CONFIG = {
   warning: {
@@ -50,8 +40,9 @@ const BaseAlert = ({
   alertType,
   onSecondaryClick,
   onPrimaryClick,
-  onOverwriteClick,
-  message
+  onAbort,
+  message,
+  edgeCase
 }) => {
   return React.createElement(
     _getComponent(alertType),
@@ -80,9 +71,9 @@ const BaseAlert = ({
             disabled={JSON.stringify(message).indexOf("ValidationError") > -1}
           />
         </Wrapper>
-        {alertType === "warning" && (
+        {alertType === "warning" && edgeCase && (
           <Wrapper styling={{ padding: "0px 5px" }}>
-            <RedButton text="Overwrite" onClick={onOverwriteClick} />
+            <RedButton text="Abort" onClick={onAbort} />
           </Wrapper>
         )}
       </Wrapper>

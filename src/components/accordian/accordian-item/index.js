@@ -11,15 +11,7 @@ import ReactDOM from "react-dom";
 import AccordionItemBody from "./accordion-item-body";
 import AccordionItemTitle from "./acccordion-item-title";
 import Wrapper from "../../wrapper";
-
-const usePrevious = value => {
-  const ref = useRef();
-  useEffect(() => {
-    ref.current = value;
-  }, [value]);
-
-  return ref.current;
-};
+import usePrevious from "../../../hooks/usePrevious";
 
 const AccordionItem = props => {
   const [maxHeight, setMaxHeight] = useState(props.expanded ? "none" : 0);

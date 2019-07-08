@@ -6,11 +6,7 @@ import { Error, Alert } from "../../../alert-handler";
 import { Danger as CancelButton, Primary as EditButton } from "../../../button";
 import { initUpdateStop } from "../../../../ducks/actions";
 import isEqual from "lodash.isequal";
-
-const TYPES = {
-  WARNING: "warning",
-  DANGER: "danger"
-};
+import { TYPES } from "../../../../consts";
 
 const useForm = (fields = {}) => {
   useEffect(() => {
@@ -46,15 +42,13 @@ const EditStop = ({
   onEdit,
   onDelete,
   onCancel,
-  editingStepId
+  editingStepId,
+  edgeCase
 }) => {
   const { form, onChange } = useForm({
     formName: stop.name,
     formAddress: stop.address
   });
-  // const isFormDisabled = useSelector(state => {
-  //   return state.error || state.alert;
-  // }, shallowEqual);
 
   const { formName, formAddress } = form;
   const stopWithForm = { ...stop, name: formName, address: formAddress };
@@ -157,9 +151,10 @@ const EditStop = ({
           <Alert
             onPrimaryClick={_onPrimaryClick}
             onSecondaryClick={_onSecondaryClick}
-            onOverwriteClick={_onAbort}
+            onAbort={_onAbort}
             className="validation-alert"
             message={stop.recommendedAddress}
+            edgeCase={edgeCase}
           />
         )}
       </Wrapper>

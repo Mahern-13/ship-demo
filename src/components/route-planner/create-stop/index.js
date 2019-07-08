@@ -32,14 +32,18 @@ const CreateStop = () => {
     address: "",
     clearForm: shouldClearForm
   });
-  const isFormDisabled = useSelector(state => {
-    return state.error || state.alert;
+  const { isFormDisabled, isCreatingStop } = useSelector(state => {
+    return {
+      isFormDisabled: state.error || state.alert,
+      isCreatingStop: state.isCreatingStop
+    };
   }, shallowEqual);
   const dispatch = useDispatch();
 
   const { name, address } = form;
 
   const _onSubmitForm = () => {
+    if (isCreatingStop) return;
     dispatch(initCreateStop(name, address));
     clearForm();
   };
@@ -99,7 +103,7 @@ const CreateStop = () => {
         </Wrapper>
         <Wrapper>
           <SubmitButton
-            disabled={isFormDisabled}
+            disabled={isFormDisabled || isCreatingStop}
             text="Submit"
             onClick={_onSubmitForm}
             buttonSize="LARGE"

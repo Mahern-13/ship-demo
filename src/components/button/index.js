@@ -1,18 +1,6 @@
 import React from "react";
 import "./style.scss";
-
-export const SIZES = {
-  SMALL: "xs",
-  MEDIUM: "sm",
-  LARGE: "lg"
-};
-
-export const TYPES = {
-  DEFAULT: "default",
-  PRIMARY: "primary",
-  WARNING: "warning",
-  DANGER: "danger"
-};
+import { SIZES, TYPES } from "../../consts";
 
 const BaseButton = ({ text, onClick, disabled, buttonType, buttonSize }) => (
   <button

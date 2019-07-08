@@ -1,16 +1,24 @@
 import * as Types from "../types";
+import uuidv4 from "uuid/v4";
+
 const initialState = {
   stops: {},
   routes: [],
   alert: null,
   error: null,
-  editingStepId: null
+  editingStepId: null,
+  isCreatingStop: false
 };
 
 const updateObj = (oldState, updatedProperties) => ({
   ...oldState,
   ...updatedProperties
 });
+
+const _setCreatingStopState = (state, { bool }) =>
+  updateObj(state, {
+    isCreatingStop: bool
+  });
 
 const _setEditingStep = (state, { id }) => {
   const newState = updateObj(state, {
@@ -20,8 +28,8 @@ const _setEditingStep = (state, { id }) => {
   return newState;
 };
 
-const _createStop = (state, { stop, alert, error }) => {
-  const createdId = stop.name.slice(0, 5) + stop.address.slice(0, 5);
+const _createStop = (state, { stop, alert, error, edgeCase }) => {
+  const createdId = uuidv4();
   const newState = updateObj(state, {
     stops: updateObj(state.stops, {
       [createdId]: updateObj(stop, { id: createdId })
@@ -29,12 +37,13 @@ const _createStop = (state, { stop, alert, error }) => {
     routes: [...state.routes, createdId],
     alert,
     error,
-    editingStepId: createdId
+    editingStepId: createdId,
+    edgeCase
   });
   return newState;
 };
 
-const _updateStop = (state, { stop, alert, error }) => {
+const _updateStop = (state, { stop, alert, error, edgeCase }) => {
   const updatedEditId = stop.verified ? null : state.editingStepId;
 
   const newState = updateObj(state, {
@@ -43,7 +52,8 @@ const _updateStop = (state, { stop, alert, error }) => {
     }),
     alert,
     error,
-    editingStepId: updatedEditId
+    editingStepId: updatedEditId,
+    edgeCase
   });
   return newState;
 };
@@ -57,7 +67,8 @@ const _deleteStop = (state, { id }) => {
     routes: state.routes.filter(route => route !== id),
     alert: null,
     error: null,
-    editingStepId: updatedEditId
+    editingStepId: updatedEditId,
+    edgeCase: false
   });
   return newState;
 };
@@ -83,6 +94,8 @@ const reducer = (state = initialState, action) => {
       return _updateStop(state, action);
     case Types.deleteStop:
       return _deleteStop(state, action);
+    case Types.creatingStopState:
+      return _setCreatingStopState(state, action);
     default:
       return state;
   }

@@ -5,7 +5,7 @@ import Checkbox from "../../../checkbox";
 
 const iconStyle = { padding: "0px 5px" };
 
-const StopsItem = ({ index, stop, onEdit, onDelete }) => {
+const StopsItem = ({ index, stop, onEdit, onDelete, editingStepId }) => {
   const { name, address, completed } = stop;
 
   const elStyle = {
@@ -22,10 +22,18 @@ const StopsItem = ({ index, stop, onEdit, onDelete }) => {
     >
       <Wrapper styling={{ justifyContent: "flex-start" }}>
         <Wrapper styling={iconStyle}>
-          <PencilIcon onClick={() => onEdit(stop.id)} size={20} />
+          <PencilIcon
+            disabled={!!editingStepId}
+            onClick={() => onEdit(stop.id)}
+            size={20}
+          />
         </Wrapper>
         <Wrapper styling={iconStyle}>
-          <TrashIcon onClick={() => onDelete(stop.id)} size={20} />
+          <TrashIcon
+            disabled={!!editingStepId}
+            onClick={() => onDelete(stop.id)}
+            size={20}
+          />
         </Wrapper>
         <Wrapper styling={elStyle}>
           <Checkbox label={index} stop={stop} />

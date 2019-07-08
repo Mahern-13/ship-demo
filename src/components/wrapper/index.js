@@ -9,10 +9,10 @@ const divStyle = {
   flexDirection: "row"
 };
 
-const wrapper = ({ styling, assignClass, onClick, children }) => (
+const wrapper = ({ styling, assignClass, onClick, children, disabled }) => (
   <div
     className={assignClass ? "wrapper " + `${assignClass}` : "wrapper"}
-    onClick={onClick ? onClick : () => {}}
+    onClick={!disabled && onClick ? onClick : () => {}}
     style={{
       ...divStyle,
       ...styling

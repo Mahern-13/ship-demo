@@ -5,8 +5,9 @@ export const deleteStop = id => ({
   type: Types.deleteStop
 });
 
-export const createStop = ({ stop, stopAlert, stopError }) => ({
+export const createStop = ({ stop, stopAlert, stopError, edgeCase }) => ({
   stop,
+  edgeCase,
   alert: stopAlert,
   error: stopError,
   type: Types.createStop
@@ -18,8 +19,9 @@ export const initCreateStop = (name, address) => ({
   type: Types.initCreateStop
 });
 
-export const updateStop = ({ stop, stopAlert, stopError }) => ({
+export const updateStop = ({ stop, stopAlert, stopError, edgeCase }) => ({
   stop,
+  edgeCase,
   alert: stopAlert,
   error: stopError,
   type: Types.updateStop
@@ -38,4 +40,9 @@ export const setEditingStep = id => ({
 export const setCompletionOfStop = stop => ({
   stop,
   type: Types.completionOfStop
+});
+
+export const setCreatingStopState = bool => ({
+  bool,
+  type: Types.creatingStopState
 });

@@ -16,7 +16,7 @@ const RoutePlanner = () => {
   return (
     <Wrapper styling={{ flexDirection: "column" }}>
       <Wrapper styling={divStyling}>
-        {/* {<Logo />} */}
+        <Logo />
         <CreateStop />
       </Wrapper>
       <Wrapper styling={divStyling}>
