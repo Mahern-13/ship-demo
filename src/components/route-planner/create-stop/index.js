@@ -59,7 +59,7 @@ const CreateStop = () => {
   //   prevInput.current = fields;
   // });
 
-  const clearForm = () => (shouldClearForm = true);
+  const clearForm = () => console.log(clear);
 
   return (
     <PrimaryCard
@@ -103,7 +103,7 @@ const CreateStop = () => {
         </Wrapper>
         <Wrapper>
           <SubmitButton
-            disabled={isFormDisabled || isCreatingStop}
+            disabled={isFormDisabled || isCreatingStop || address.length < 3}
             text="Submit"
             onClick={_onSubmitForm}
             buttonSize="LARGE"
