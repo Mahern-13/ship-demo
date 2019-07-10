@@ -42,8 +42,7 @@ const EditStop = ({
   onEdit,
   onDelete,
   onCancel,
-  editingStepId,
-  edgeCase
+  editingStepId
 }) => {
   const { form, onChange } = useForm({
     formName: stop.name,
@@ -85,10 +84,6 @@ const EditStop = ({
       dispatch(initUpdateStop(stop));
     }
   });
-
-  const _onAbort = () => {
-    return onDelete(stop.id);
-  };
 
   return (
     <Wrapper styling={{ flexDirection: "column", padding: "0" }}>
@@ -158,10 +153,8 @@ const EditStop = ({
           <Alert
             onPrimaryClick={_onPrimaryClick}
             onSecondaryClick={_onSecondaryClick}
-            onAbort={_onAbort}
             className="validation-alert"
             message={stop.recommendedAddress}
-            edgeCase={edgeCase}
           />
         )}
       </Wrapper>

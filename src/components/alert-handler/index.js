@@ -38,9 +38,7 @@ const BaseAlert = ({
   alertType,
   onSecondaryClick,
   onPrimaryClick,
-  onAbort,
-  message,
-  edgeCase
+  message
 }) => {
   return React.createElement(
     _getComponent(alertType),
@@ -69,11 +67,6 @@ const BaseAlert = ({
             disabled={JSON.stringify(message).indexOf("ValidationError") > -1}
           />
         </Wrapper>
-        {alertType === "warning" && edgeCase && (
-          <Wrapper styling={{ padding: "0px 5px" }}>
-            <RedButton text="Abort" onClick={onAbort} />
-          </Wrapper>
-        )}
       </Wrapper>
     </Wrapper>
   );

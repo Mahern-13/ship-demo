@@ -5,9 +5,8 @@ export const deleteStop = id => ({
   type: Types.deleteStop
 });
 
-export const createStop = ({ stop, stopAlert, stopError, edgeCase }) => ({
+export const createStop = ({ stop, stopAlert, stopError }) => ({
   stop,
-  edgeCase,
   alert: stopAlert,
   error: stopError,
   type: Types.createStop

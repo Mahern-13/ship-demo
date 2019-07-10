@@ -10,20 +10,16 @@ import EditItem from "./edit-item";
 import StopsItem from "./stops-item";
 
 const StopsEditor = () => {
-  const { routes, stops, alert, error, editingStepId, edgeCase } = useSelector(
-    state => {
-      const { stops, routes, alert, error, editingStepId, edgeCase } = state;
-      return {
-        stops,
-        routes,
-        alert,
-        error,
-        editingStepId,
-        edgeCase
-      };
-    },
-    shallowEqual
-  );
+  const { routes, stops, alert, error, editingStepId } = useSelector(state => {
+    const { stops, routes, alert, error, editingStepId } = state;
+    return {
+      stops,
+      routes,
+      alert,
+      error,
+      editingStepId
+    };
+  }, shallowEqual);
   const dispatch = useDispatch();
   const previousRoutesLength = usePrevious(routes.length);
 
@@ -93,7 +89,6 @@ const StopsEditor = () => {
                 onDelete={_onDelete}
                 onCancel={_onCancelEdit}
                 editingStepId={editingStepId}
-                edgeCase={edgeCase}
               />
             </AccordionItem>
           );

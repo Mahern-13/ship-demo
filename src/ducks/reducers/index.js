@@ -67,8 +67,7 @@ const _deleteStop = (state, { id }) => {
     routes: state.routes.filter(route => route !== id),
     alert: null,
     error: null,
-    editingStepId: updatedEditId,
-    edgeCase: false
+    editingStepId: updatedEditId
   });
   return newState;
 };
