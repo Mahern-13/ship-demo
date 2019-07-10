@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`redux actions dispatches createStop and the correct payload 1`] = `
+Array [
+  Object {
+    "alert": undefined,
+    "error": undefined,
+    "stop": undefined,
+    "type": "CREATE_STOP",
+  },
+]
+`;
+
+exports[`redux actions dispatches deleteStop and the correct payload 1`] = `
+Array [
+  Object {
+    "id": 1,
+    "type": "DELETE_STOP",
+  },
+]
+`;
+
+exports[`redux actions dispatches initCreateStop and the correct payload 1`] = `
+Array [
+  Object {
+    "address": "test123",
+    "name": "test",
+    "type": "INIT_CREATE_STOP",
+  },
+]
+`;
+
+exports[`redux actions dispatches initUpdateStop and the correct payload 1`] = `
+Array [
+  Object {
+    "stop": Object {
+      "address": "test123",
+      "completed": false,
+      "id": 1,
+      "name": "test",
+      "verified": true,
+    },
+    "type": "INIT_UPDATE_STOP",
+  },
+]
+`;
+
+exports[`redux actions dispatches setCompletionOfStop and the correct payload 1`] = `
+Array [
+  Object {
+    "stop": Object {
+      "address": "test123",
+      "completed": false,
+      "id": 1,
+      "name": "test",
+      "verified": true,
+    },
+    "type": "COMPLETION_OF_STOP",
+  },
+]
+`;
+
+exports[`redux actions dispatches setCreatingStopState and the correct payload 1`] = `
+Array [
+  Object {
+    "bool": true,
+    "type": "CREATING_STOP_STATE",
+  },
+]
+`;
+
+exports[`redux actions dispatches setDidAddRoute and the correct payload 1`] = `
+Array [
+  Object {
+    "bool": true,
+    "type": "SET_DID_ADD_ROUTE",
+  },
+]
+`;
+
+exports[`redux actions dispatches setEditingStep and the correct payload 1`] = `
+Array [
+  Object {
+    "id": 1,
+    "type": "EDITING_STEP",
+  },
+]
+`;
+
+exports[`redux actions dispatches updateStop and the correct payload 1`] = `
+Array [
+  Object {
+    "alert": undefined,
+    "error": undefined,
+    "stop": undefined,
+    "type": "UPDATE_STOP",
+  },
+]
+`;

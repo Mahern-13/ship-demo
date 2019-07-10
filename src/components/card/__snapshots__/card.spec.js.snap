@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Danger renders the component 1`] = `ShallowWrapper {}`;
+
+exports[`Default renders the component 1`] = `ShallowWrapper {}`;
+
+exports[`Primary renders the component 1`] = `ShallowWrapper {}`;
+
+exports[`Warning renders the component 1`] = `ShallowWrapper {}`;

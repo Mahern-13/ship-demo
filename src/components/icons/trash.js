@@ -4,7 +4,7 @@ import { DISABLED_COLOR } from "../../consts";
 
 const disabledFill = DISABLED_COLOR;
 
-function TrashIcon({ size, fill, onClick, disabled }) {
+function TrashIcon({ size, onClick, disabled }) {
   return (
     <Wrapper disabled={disabled} onClick={onClick} styling={{ padding: "0" }}>
       <svg

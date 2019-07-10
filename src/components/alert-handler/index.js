@@ -1,10 +1,6 @@
 import React from "react";
 import { TYPES } from "../../consts";
-import {
-  Danger as RedButton,
-  Default as CancelButton,
-  Primary as PrimaryButton
-} from "../button";
+import { Default as CancelButton, Primary as PrimaryButton } from "../button";
 import { Danger, Warning } from "../card";
 import Wrapper from "../wrapper";
 

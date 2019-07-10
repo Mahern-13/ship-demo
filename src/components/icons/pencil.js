@@ -4,7 +4,7 @@ import Wrapper from "../wrapper";
 
 const disabledFill = DISABLED_COLOR;
 
-function PencilIcon({ size, fill, onClick, disabled }) {
+function PencilIcon({ size, onClick, disabled }) {
   return (
     <Wrapper disabled={disabled} onClick={onClick} styling={{ padding: "0" }}>
       <svg
