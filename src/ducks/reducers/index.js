@@ -7,7 +7,8 @@ const initialState = {
   alert: null,
   error: null,
   editingStepId: null,
-  isCreatingStop: false
+  isCreatingStop: false,
+  didAddRoute: false
 };
 
 const updateObj = (oldState, updatedProperties) => ({
@@ -28,7 +29,7 @@ const _setEditingStep = (state, { id }) => {
   return newState;
 };
 
-const _createStop = (state, { stop, alert, error, edgeCase }) => {
+const _createStop = (state, { stop, alert, error }) => {
   const createdId = uuidv4();
   const newState = updateObj(state, {
     stops: updateObj(state.stops, {
@@ -38,7 +39,7 @@ const _createStop = (state, { stop, alert, error, edgeCase }) => {
     alert,
     error,
     editingStepId: createdId,
-    edgeCase
+    didAddRoute: true
   });
   return newState;
 };
@@ -81,6 +82,9 @@ const _completionOfStop = (state, { stop }) => {
   return newState;
 };
 
+const _setDidAddRoute = (state, { bool }) =>
+  updateObj(state, { didAddRoute: bool });
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case Types.editingStep:
@@ -95,7 +99,8 @@ const reducer = (state = initialState, action) => {
       return _deleteStop(state, action);
     case Types.creatingStopState:
       return _setCreatingStopState(state, action);
-
+    case Types.setDidAddRoute:
+      return _setDidAddRoute(state, action);
     default:
       return state;
   }

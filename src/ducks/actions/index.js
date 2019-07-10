@@ -45,3 +45,8 @@ export const setCreatingStopState = bool => ({
   bool,
   type: Types.creatingStopState
 });
+
+export const setDidAddRoute = bool => ({
+  bool,
+  type: Types.setDidAddRoute
+});

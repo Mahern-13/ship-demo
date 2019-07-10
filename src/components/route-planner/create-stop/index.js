@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { memo, useState, useEffect } from "react";
 import TextInput from "../../text-input";
 import { Primary as PrimaryCard } from "../../card";
 import Wrapper from "../../wrapper";
@@ -6,7 +6,7 @@ import { Primary as SubmitButton } from "../../button";
 import { Default as ClearButton } from "../../button";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import "./style.scss";
-import { initCreateStop } from "../../../ducks/actions";
+import { initCreateStop, setDidAddRoute } from "../../../ducks/actions";
 
 const useForm = (fields = {}) => {
   const [formState, setFormState] = useState(fields);
@@ -18,28 +18,32 @@ const useForm = (fields = {}) => {
 
     setFormState(formData);
   };
+
+  const resetForm = () => {
+    setFormState(fields);
+  };
   return {
     form: formState,
-    onChange
+    onChange,
+    resetForm
   };
 };
 
 const CreateStop = () => {
   const [addressError, setAddressError] = useState(false);
   const [nameError, setNameError] = useState(false);
-  const { form, onChange } = useForm({
+  const { form, onChange, resetForm } = useForm({
     name: "",
-    address: "",
-    clearForm: shouldClearForm
+    address: ""
   });
-  const { isFormDisabled, isCreatingStop } = useSelector(state => {
+  const { isFormDisabled, isCreatingStop, didAddRoute } = useSelector(state => {
     return {
       isFormDisabled: state.error || state.alert,
-      isCreatingStop: state.isCreatingStop
+      isCreatingStop: state.isCreatingStop,
+      didAddRoute: state.didAddRoute
     };
   }, shallowEqual);
   const dispatch = useDispatch();
-  let shouldClearForm = false;
 
   const { name, address } = form;
 
@@ -67,8 +71,14 @@ const CreateStop = () => {
     const isFormValid = _isFormValid(name, address);
     if (!isFormValid) return;
     dispatch(initCreateStop(name, address));
-    clearForm();
   };
+
+  useEffect(() => {
+    if (didAddRoute) {
+      resetForm();
+      dispatch(setDidAddRoute(false));
+    }
+  }, [didAddRoute]);
 
   // useEffect(() => {
   //   if (isEqual(prevInput.current, fields)) {
@@ -80,8 +90,6 @@ const CreateStop = () => {
   // useEffect(() => {
   //   prevInput.current = fields;
   // });
-
-  const clearForm = () => console.log("clear");
 
   return (
     <PrimaryCard
@@ -119,16 +127,12 @@ const CreateStop = () => {
       </Wrapper>
       <Wrapper styling={{ flexDirection: "row", justifyContent: "flex-end" }}>
         <Wrapper>
-          <ClearButton
-            text="Clear"
-            onClick={() => clearForm()}
-            buttonSize="LARGE"
-          />
+          <ClearButton text="Clear" onClick={resetForm} buttonSize="LARGE" />
         </Wrapper>
         <Wrapper>
           <SubmitButton
             disabled={isFormDisabled || isCreatingStop}
-            text="Submit"
+            text={isCreatingStop ? "Submitting..." : "Submit"}
             onClick={_onSubmitForm}
             buttonSize="LARGE"
           />

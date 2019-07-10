@@ -6,3 +6,4 @@ export const initUpdateStop = "INIT_UPDATE_STOP";
 export const updateStop = "UPDATE_STOP";
 export const completionOfStop = "COMPLETION_OF_STOP";
 export const creatingStopState = "CREATING_STOP_STATE";
+export const setDidAddRoute = "SET_DID_ADD_ROUTE";
