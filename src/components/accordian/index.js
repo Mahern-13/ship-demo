@@ -1,39 +1,16 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect, memo } from "react";
 import Wrapper from "../wrapper";
 
 import { isSame, arrayify, getActiveItem } from "./utils";
 
-export default class Accordion extends Component {
-  constructor(props) {
-    super(props);
+const Accordion = props => {
+  const [activeItem, setActiveItem] = useState(getActiveItem(props.children));
+  const { className, children } = props;
 
-    this.state = {
-      activeItem: getActiveItem(props.children)
-    };
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    return !isSame(getActiveItem(nextProps.children), prevState.activeItem)
-      ? { update: true }
-      : { update: null };
-  }
-
-  componentDidUpdate() {
-    if (this.state.update === true) {
-      this.setState({
-        activeItem: getActiveItem(this.props.children)
-      });
-    }
-  }
-
-  renderItems() {
-    const { children } = this.props;
-
+  const _renderItems = () => {
     if (!children) {
       return null;
     }
-
-    const { activeItem } = this.state;
 
     return arrayify(children).reduce((acc, item, index) => {
       if (item) {
@@ -52,22 +29,43 @@ export default class Accordion extends Component {
       }
       return acc;
     }, []);
-  }
+  };
 
-  render() {
-    const { className } = this.props;
+  useEffect(() => {
+    const activeItemAfterUpdate = getActiveItem(children);
+    if (!isSame(activeItemAfterUpdate, activeItem)) {
+      setActiveItem(activeItemAfterUpdate);
+    }
+  }, [children]);
 
-    return (
-      <Wrapper
-        className={className}
-        styling={{ padding: "0", flexDirection: "column" }}
-      >
-        {this.renderItems()}
-      </Wrapper>
-    );
-  }
-}
+  return (
+    <Wrapper
+      className={className}
+      styling={{ padding: "0", flexDirection: "column" }}
+    >
+      {_renderItems()}
+    </Wrapper>
+  );
+};
 
 Accordion.defaultProps = {
   activeItem: []
 };
+
+export default Accordion;
+
+/*class Accordion2 extends Component {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return !isSame(getActiveItem(nextProps.children), prevState.activeItem)
+      ? { update: true }
+      : { update: null };
+  }
+
+  componentDidUpdate() {
+    if (this.state.update === true) {
+      this.setState({
+        activeItem: getActiveItem(this.props.children)
+      });
+    }
+  }
+}*/

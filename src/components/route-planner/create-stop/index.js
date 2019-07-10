@@ -25,8 +25,8 @@ const useForm = (fields = {}) => {
 };
 
 const CreateStop = () => {
-  let shouldClearForm = false;
-
+  const [addressError, setAddressError] = useState(false);
+  const [nameError, setNameError] = useState(false);
   const { form, onChange } = useForm({
     name: "",
     address: "",
@@ -39,11 +39,33 @@ const CreateStop = () => {
     };
   }, shallowEqual);
   const dispatch = useDispatch();
+  let shouldClearForm = false;
 
   const { name, address } = form;
 
+  const _isFormValid = (name, address) => {
+    let valid = true;
+    if (address.length < 3) {
+      setAddressError(true);
+      valid = false;
+    } else {
+      setAddressError(false);
+    }
+
+    if (name.length === 0) {
+      setNameError(true);
+      valid = false;
+    } else {
+      setNameError(false);
+    }
+
+    return valid;
+  };
+
   const _onSubmitForm = () => {
     if (isCreatingStop) return;
+    const isFormValid = _isFormValid(name, address);
+    if (!isFormValid) return;
     dispatch(initCreateStop(name, address));
     clearForm();
   };
@@ -59,7 +81,7 @@ const CreateStop = () => {
   //   prevInput.current = fields;
   // });
 
-  const clearForm = () => console.log(clear);
+  const clearForm = () => console.log("clear");
 
   return (
     <PrimaryCard
@@ -81,6 +103,7 @@ const CreateStop = () => {
           value={name}
           onChange={onChange}
         />
+        {nameError && <p>Name is required</p>}
       </Wrapper>
       <Wrapper>
         <TextInput
@@ -92,6 +115,7 @@ const CreateStop = () => {
           value={address}
           onChange={onChange}
         />
+        {addressError && <p>Address must have at least 3 characters</p>}
       </Wrapper>
       <Wrapper styling={{ flexDirection: "row", justifyContent: "flex-end" }}>
         <Wrapper>
@@ -103,7 +127,7 @@ const CreateStop = () => {
         </Wrapper>
         <Wrapper>
           <SubmitButton
-            disabled={isFormDisabled || isCreatingStop || address.length < 3}
+            disabled={isFormDisabled || isCreatingStop}
             text="Submit"
             onClick={_onSubmitForm}
             buttonSize="LARGE"

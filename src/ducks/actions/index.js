@@ -19,9 +19,8 @@ export const initCreateStop = (name, address) => ({
   type: Types.initCreateStop
 });
 
-export const updateStop = ({ stop, stopAlert, stopError, edgeCase }) => ({
+export const updateStop = ({ stop, stopAlert, stopError }) => ({
   stop,
-  edgeCase,
   alert: stopAlert,
   error: stopError,
   type: Types.updateStop

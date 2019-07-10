@@ -11,4 +11,4 @@ export const TYPES = {
   DANGER: "danger"
 };
 
-export const DISABLED_COLOR = "#dfdfdf";
+export const DISABLED_COLOR = "hsla(0, 0%, 74%, 1)";

@@ -6,7 +6,7 @@ const BaseButton = ({ text, onClick, disabled, buttonType, buttonSize }) => (
   <button
     disabled={disabled}
     onClick={onClick}
-    className={`button-${buttonType} button-${[
+    className={`button-${buttonType} button button-${[
       SIZES[buttonSize] || SIZES.MEDIUM
     ]}`}
   >

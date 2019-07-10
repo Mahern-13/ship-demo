@@ -20,7 +20,6 @@ function* initCreateStop({ name, address }) {
     recommendedAddress: "",
     completed: false
   };
-  let edgeCase = false;
   let stopError = null;
   let stopAlert = null;
   try {
@@ -35,13 +34,6 @@ function* initCreateStop({ name, address }) {
       // Success or warning
       if (response.warnings && response.warnings.length) {
         const { formatted_address } = response.geocoded_address;
-
-        if (
-          address.slice(0, -9) === formatted_address.slice(0, -9) &&
-          address !== formatted_address
-        ) {
-          edgeCase = true;
-        }
         stopAlert = true;
         stop.recommendedAddress = formatted_address;
       } else {
@@ -53,8 +45,7 @@ function* initCreateStop({ name, address }) {
       createStop({
         stop,
         stopAlert,
-        stopError,
-        edgeCase
+        stopError
       })
     );
   } catch (err) {
@@ -67,12 +58,12 @@ function* initCreateStop({ name, address }) {
 function* initUpdateStop({ stop }) {
   let stopError = null;
   let stopAlert = null;
-  let edgeCase = false;
 
   try {
     const [response, error] = yield call(withAsync, () =>
       verifyAddress(stop.address)
     );
+    console.log("init update stop response", response, stop);
     // Error
     if (error) {
       stopError = error;
@@ -81,14 +72,6 @@ function* initUpdateStop({ stop }) {
     } else {
       // Success or warning
       if (response.warnings && response.warnings.length) {
-        const { formatted_address } = response.geocoded_address;
-
-        if (
-          stop.address.slice(0, -9) === formatted_address.slice(0, -9) &&
-          stop.address !== formatted_address
-        ) {
-          edgeCase = true;
-        }
         stopAlert = true;
         stop.recommendedAddress = response.geocoded_address.formatted_address;
         stop.verified = false;
@@ -96,13 +79,12 @@ function* initUpdateStop({ stop }) {
         stop.verified = true;
       }
     }
-
+    console.log("before update stop", stop, stopAlert, stopError);
     yield put(
       updateStop({
         stop,
         stopAlert,
-        stopError,
-        edgeCase
+        stopError
       })
     );
   } catch (err) {

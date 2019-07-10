@@ -43,7 +43,7 @@ const _createStop = (state, { stop, alert, error, edgeCase }) => {
   return newState;
 };
 
-const _updateStop = (state, { stop, alert, error, edgeCase }) => {
+const _updateStop = (state, { stop, alert, error }) => {
   const updatedEditId = stop.verified ? null : state.editingStepId;
 
   const newState = updateObj(state, {
@@ -52,8 +52,7 @@ const _updateStop = (state, { stop, alert, error, edgeCase }) => {
     }),
     alert,
     error,
-    editingStepId: updatedEditId,
-    edgeCase
+    editingStepId: updatedEditId
   });
   return newState;
 };
@@ -96,6 +95,7 @@ const reducer = (state = initialState, action) => {
       return _deleteStop(state, action);
     case Types.creatingStopState:
       return _setCreatingStopState(state, action);
+
     default:
       return state;
   }

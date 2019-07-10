@@ -4,7 +4,7 @@ import TextInput from "../../../text-input";
 import Wrapper from "../../../wrapper";
 import { Error, Alert } from "../../../alert-handler";
 import { Danger as CancelButton, Primary as EditButton } from "../../../button";
-import { initUpdateStop } from "../../../../ducks/actions";
+import { initUpdateStop, updateStop } from "../../../../ducks/actions";
 import isEqual from "lodash.isequal";
 import { TYPES } from "../../../../consts";
 
@@ -51,15 +51,12 @@ const EditStop = ({
   });
 
   const { formName, formAddress } = form;
-  const stopWithForm = { ...stop, name: formName, address: formAddress };
-  const stopWithRecommendedAddress = {
-    ...stop,
-    address: stop.recommendedAddress
-  };
 
   const dispatch = useDispatch();
 
   const _onSubmitForm = () => {
+    const stopWithForm = { ...stop, name: formName, address: formAddress };
+    console.log("in on submit form", stopWithForm);
     dispatch(initUpdateStop(stopWithForm));
   };
 
@@ -73,7 +70,18 @@ const EditStop = ({
 
   const _onPrimaryClick = useCallback(type => {
     if (type === TYPES.WARNING) {
-      dispatch(initUpdateStop(stopWithRecommendedAddress));
+      const stopWithRecommendedAddress = {
+        ...stop,
+        verified: true,
+        address: stop.recommendedAddress
+      };
+      dispatch(
+        updateStop({
+          stop: stopWithRecommendedAddress,
+          stopAlert: null,
+          stopError: null
+        })
+      );
     } else if (type === TYPES.DANGER) {
       dispatch(initUpdateStop(stop));
     }
