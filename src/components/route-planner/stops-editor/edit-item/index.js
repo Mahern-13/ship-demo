@@ -56,7 +56,6 @@ const EditStop = ({
 
   const _onSubmitForm = () => {
     const stopWithForm = { ...stop, name: formName, address: formAddress };
-    console.log("in on submit form", stopWithForm);
     dispatch(initUpdateStop(stopWithForm));
   };
 

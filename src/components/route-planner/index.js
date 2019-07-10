@@ -1,11 +1,8 @@
 import React from "react";
-
+import Logo from "../../assets/logo";
 import Wrapper from "../wrapper";
 import CreateStop from "./create-stop";
 import StopsEditor from "./stops-editor";
-import Logo from "../../assets/logo";
-
-import "./style.scss";
 
 const divStyling = {
   width: "85%",

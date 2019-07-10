@@ -1,14 +1,13 @@
-import React, { memo, useState, useEffect, useRef, useCallback } from "react";
-import { Default as Card } from "../../card";
-import Wrapper from "../../wrapper";
-import StopsItem from "./stops-item";
-import EditItem from "./edit-item";
+import React, { memo, useCallback, useEffect } from "react";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { deleteStop, setEditingStep } from "../../../ducks/actions";
+import usePrevious from "../../../hooks/usePrevious";
 import Accordion from "../../accordian";
 import AccordionItem from "../../accordian/accordian-item";
-import { useSelector, useDispatch, shallowEqual } from "react-redux";
-import "./style.scss";
-import { setEditingStep, deleteStop } from "../../../ducks/actions";
-import usePrevious from "../../../hooks/usePrevious";
+import { Default as Card } from "../../card";
+import Wrapper from "../../wrapper";
+import EditItem from "./edit-item";
+import StopsItem from "./stops-item";
 
 const StopsEditor = () => {
   const { routes, stops, alert, error, editingStepId, edgeCase } = useSelector(
@@ -62,6 +61,11 @@ const StopsEditor = () => {
       }
       cardType="default"
     >
+      {!routes.length && (
+        <Wrapper styling={{ justifyContent: "center" }}>
+          Please add routes
+        </Wrapper>
+      )}
       <Accordion className="card-group">
         {routes.map((stopId, index) => {
           return (

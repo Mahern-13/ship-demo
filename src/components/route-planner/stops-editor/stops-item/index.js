@@ -1,7 +1,7 @@
 import React, { memo } from "react";
-import Wrapper from "../../../wrapper";
-import { PencilIcon, TrashIcon } from "../../../icons";
 import Checkbox from "../../../checkbox";
+import { PencilIcon, TrashIcon } from "../../../icons";
+import Wrapper from "../../../wrapper";
 
 const iconStyle = { padding: "0px 5px" };
 

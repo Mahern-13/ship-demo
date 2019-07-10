@@ -1,12 +1,10 @@
-import React, { memo, useState, useEffect } from "react";
-import TextInput from "../../text-input";
-import { Primary as PrimaryCard } from "../../card";
-import Wrapper from "../../wrapper";
-import { Primary as SubmitButton } from "../../button";
-import { Default as ClearButton } from "../../button";
-import { useSelector, useDispatch, shallowEqual } from "react-redux";
-import "./style.scss";
+import React, { memo, useEffect, useState } from "react";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { initCreateStop, setDidAddRoute } from "../../../ducks/actions";
+import { Default as ClearButton, Primary as SubmitButton } from "../../button";
+import { Primary as PrimaryCard } from "../../card";
+import TextInput from "../../text-input";
+import Wrapper from "../../wrapper";
 
 const useForm = (fields = {}) => {
   const [formState, setFormState] = useState(fields);
@@ -36,9 +34,9 @@ const CreateStop = () => {
     name: "",
     address: ""
   });
-  const { isFormDisabled, isCreatingStop, didAddRoute } = useSelector(state => {
+  const { isAlertError, isCreatingStop, didAddRoute } = useSelector(state => {
     return {
-      isFormDisabled: state.error || state.alert,
+      isAlertError: state.error || state.alert,
       isCreatingStop: state.isCreatingStop,
       didAddRoute: state.didAddRoute
     };
@@ -80,16 +78,7 @@ const CreateStop = () => {
     }
   }, [didAddRoute]);
 
-  // useEffect(() => {
-  //   if (isEqual(prevInput.current, fields)) {
-  //     return;
-  //   }
-  //   setFormState(fields);
-  // });
-  // const prevInput = useRef();
-  // useEffect(() => {
-  //   prevInput.current = fields;
-  // });
+  const isFormDisabled = isAlertError || isCreatingStop;
 
   return (
     <PrimaryCard
@@ -127,11 +116,16 @@ const CreateStop = () => {
       </Wrapper>
       <Wrapper styling={{ flexDirection: "row", justifyContent: "flex-end" }}>
         <Wrapper>
-          <ClearButton text="Clear" onClick={resetForm} buttonSize="LARGE" />
+          <ClearButton
+            disabled={isFormDisabled}
+            text="Clear"
+            onClick={resetForm}
+            buttonSize="LARGE"
+          />
         </Wrapper>
         <Wrapper>
           <SubmitButton
-            disabled={isFormDisabled || isCreatingStop}
+            disabled={isFormDisabled}
             text={isCreatingStop ? "Submitting..." : "Submit"}
             onClick={_onSubmitForm}
             buttonSize="LARGE"

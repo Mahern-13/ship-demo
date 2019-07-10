@@ -1,7 +1,6 @@
 import React, { memo } from "react";
 import { useDispatch } from "react-redux";
 import { setCompletionOfStop } from "../../ducks/actions";
-
 import "./style.scss";
 
 const Checkbox = ({ label, stop }) => {

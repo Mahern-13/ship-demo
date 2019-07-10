@@ -1,12 +1,12 @@
 import React from "react";
-import "./style.scss";
 import { SIZES, TYPES } from "../../consts";
+import "./style.scss";
 
 const BaseButton = ({ text, onClick, disabled, buttonType, buttonSize }) => (
   <button
     disabled={disabled}
     onClick={onClick}
-    className={`button-${buttonType} button button-${[
+    className={`button button-${buttonType} button-${[
       SIZES[buttonSize] || SIZES.MEDIUM
     ]}`}
   >

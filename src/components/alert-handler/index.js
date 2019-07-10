@@ -1,14 +1,12 @@
 import React from "react";
-import Wrapper from "../wrapper";
-import { Warning, Danger } from "../card";
+import { TYPES } from "../../consts";
 import {
+  Danger as RedButton,
   Default as CancelButton,
-  Primary as PrimaryButton,
-  Danger as RedButton
+  Primary as PrimaryButton
 } from "../button";
-import { SIZES, TYPES } from "../../consts";
-
-import "./style.scss";
+import { Danger, Warning } from "../card";
+import Wrapper from "../wrapper";
 
 const CONFIG = {
   warning: {

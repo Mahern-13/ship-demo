@@ -1,17 +1,9 @@
-import React, {
-  Component,
-  createRef,
-  useState,
-  useEffect,
-  useRef,
-  memo
-} from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
-
-import AccordionItemBody from "./accordion-item-body";
-import AccordionItemTitle from "./acccordion-item-title";
-import Wrapper from "../../wrapper";
 import usePrevious from "../../../hooks/usePrevious";
+import Wrapper from "../../wrapper";
+import AccordionItemTitle from "./acccordion-item-title";
+import AccordionItemBody from "./accordion-item-body";
 
 const AccordionItem = props => {
   const [maxHeight, setMaxHeight] = useState(props.expanded ? "none" : 0);

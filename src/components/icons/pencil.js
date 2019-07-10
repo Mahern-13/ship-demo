@@ -1,6 +1,6 @@
 import React from "react";
-import Wrapper from "../wrapper";
 import { DISABLED_COLOR } from "../../consts";
+import Wrapper from "../wrapper";
 
 const disabledFill = DISABLED_COLOR;
 
