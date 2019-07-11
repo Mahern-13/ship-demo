@@ -5,20 +5,19 @@ import Wrapper from "../../../wrapper";
 import { Error, Alert } from "../../../alert-handler";
 import { Danger as CancelButton, Primary as EditButton } from "../../../button";
 import { initUpdateStop, updateStop } from "../../../../ducks/actions";
+import usePrevious from "../../../../hooks/usePrevious";
 import isEqual from "lodash.isequal";
 import { TYPES } from "../../../../consts";
 
 const useForm = (fields = {}) => {
   useEffect(() => {
-    if (isEqual(prevInput.current, fields)) {
+    if (isEqual(prevInput, fields)) {
       return;
     }
     setFormState(fields);
-  });
-  const prevInput = useRef();
-  useEffect(() => {
-    prevInput.current = fields;
-  });
+  }, [fields]);
+
+  const prevInput = usePrevious(fields);
 
   const [formState, setFormState] = useState(fields);
   const onChange = e => {
@@ -162,6 +161,4 @@ const EditStop = ({
   );
 };
 
-export default memo(EditStop, (prevProps, nextProps) =>
-  isEqual(prevProps, nextProps)
-);
+export default memo(EditStop);

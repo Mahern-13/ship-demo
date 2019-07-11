@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { initCreateStop, setDidAddRoute } from "../../../ducks/actions";
 import { Default as ClearButton, Primary as SubmitButton } from "../../button";
-import { Primary as PrimaryCard } from "../../card";
+import { Primary as PrimaryCard, Default as DefaultCard } from "../../card";
 import TextInput from "../../text-input";
 import Wrapper from "../../wrapper";
 
@@ -29,44 +29,45 @@ const useForm = (fields = {}) => {
 
 const CreateStop = () => {
   const [addressError, setAddressError] = useState(false);
-  const [nameError, setNameError] = useState(false);
   const { form, onChange, resetForm } = useForm({
     name: "",
     address: ""
   });
-  const { isAlertError, isCreatingStop, didAddRoute } = useSelector(state => {
+  const {
+    isAlertError,
+    isCreatingStop,
+    didAddRoute,
+    editingStepId
+  } = useSelector(state => {
     return {
       isAlertError: state.error || state.alert,
       isCreatingStop: state.isCreatingStop,
-      didAddRoute: state.didAddRoute
+      didAddRoute: state.didAddRoute,
+      editingStepId: state.editingStepId
     };
   }, shallowEqual);
   const dispatch = useDispatch();
 
   const { name, address } = form;
 
-  const _isFormValid = (name, address) => {
+  const _isFormValid = address => {
     let valid = true;
-    if (address.length < 3) {
+    console.log("address", address.trim.length < 3);
+    if (address.trim().length < 3) {
       setAddressError(true);
       valid = false;
     } else {
       setAddressError(false);
     }
 
-    if (name.length === 0) {
-      setNameError(true);
-      valid = false;
-    } else {
-      setNameError(false);
-    }
-
     return valid;
   };
 
   const _onSubmitForm = () => {
+    console.log(isCreatingStop);
     if (isCreatingStop) return;
-    const isFormValid = _isFormValid(name, address);
+    const isFormValid = _isFormValid(address);
+    console.log(isFormValid);
     if (!isFormValid) return;
     dispatch(initCreateStop(name, address));
   };
@@ -78,7 +79,7 @@ const CreateStop = () => {
     }
   }, [didAddRoute]);
 
-  const isFormDisabled = isAlertError || isCreatingStop;
+  const isFormDisabled = isAlertError || isCreatingStop || editingStepId;
 
   return (
     <PrimaryCard
@@ -90,7 +91,7 @@ const CreateStop = () => {
       }
       cardType="primary"
     >
-      <Wrapper>
+      <Wrapper styling={{ flexDirection: "column" }}>
         <TextInput
           id="name-input"
           label="Name"
@@ -100,9 +101,8 @@ const CreateStop = () => {
           value={name}
           onChange={onChange}
         />
-        {nameError && <p>Name is required</p>}
       </Wrapper>
-      <Wrapper>
+      <Wrapper styling={{ flexDirection: "column" }}>
         <TextInput
           id="address-input"
           label="Address"
@@ -112,9 +112,18 @@ const CreateStop = () => {
           value={address}
           onChange={onChange}
         />
-        {addressError && <p>Address must have at least 3 characters</p>}
       </Wrapper>
-      <Wrapper styling={{ flexDirection: "row", justifyContent: "flex-end" }}>
+      <Wrapper
+        styling={{
+          flexDirection: "row",
+          justifyContent: "flex-end"
+        }}
+      >
+        {addressError && (
+          <DefaultCard header={false}>
+            &#8226; Address must have at least 3 characters
+          </DefaultCard>
+        )}
         <Wrapper>
           <ClearButton
             disabled={isFormDisabled}
