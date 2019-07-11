@@ -8,6 +8,7 @@ function TrashIcon({ size, onClick, disabled }) {
   return (
     <Wrapper disabled={disabled} onClick={onClick} styling={{ padding: "0" }}>
       <svg
+        data-testid="trash-icon-id"
         disabled={disabled}
         height={`${size}pt`}
         viewBox={`-48 0 512 512`}

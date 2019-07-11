@@ -63,6 +63,8 @@ function* initUpdateStop({ stop }) {
     const [response, error] = yield call(withAsync, () =>
       verifyAddress(stop.address)
     );
+
+    console.log("initUpdate", response, error);
     // Error
     if (error) {
       stopError = error;

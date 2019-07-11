@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo } from "react";
 import Wrapper from "../wrapper";
 import { arrayify, getActiveItem, isSame } from "./utils";
 
@@ -51,4 +51,4 @@ Accordion.defaultProps = {
   activeItem: []
 };
 
-export default Accordion;
+export default memo(Accordion);

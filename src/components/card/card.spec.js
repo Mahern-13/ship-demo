@@ -1,39 +1,21 @@
-import { shallow } from "enzyme";
+// import { shallow } from "enzyme";
+// import React from "react";
+// import { Default, Primary, Warning, Danger } from "./index";
+
 import React from "react";
-import { Default, Primary, Warning, Danger } from "./index";
-
-describe("Default", () => {
-  it("renders the component", () => {
-    const wrapper = shallow(<Default header="header" children="children" />);
-
-    expect(wrapper.exists()).toBe(true);
-    expect(wrapper).toMatchSnapshot();
-  });
-});
+import { Primary } from "./index";
+import { render, fireEvent } from "@testing-library/react";
 
 describe("Primary", () => {
-  it("renders the component", () => {
-    const wrapper = shallow(<Primary header="header" children="children" />);
+  it("handles a click", () => {
+    const { getByText } = render(
+      <Primary header="header" children="children" />
+    );
 
-    expect(wrapper.exists()).toBe(true);
-    expect(wrapper).toMatchSnapshot();
-  });
-});
+    const header = getByText("header");
+    expect(header).toBeInTheDocument();
 
-describe("Warning", () => {
-  it("renders the component", () => {
-    const wrapper = shallow(<Warning header="header" children="children" />);
-
-    expect(wrapper.exists()).toBe(true);
-    expect(wrapper).toMatchSnapshot();
-  });
-});
-
-describe("Danger", () => {
-  it("renders the component", () => {
-    const wrapper = shallow(<Danger header="header" children="children" />);
-
-    expect(wrapper.exists()).toBe(true);
-    expect(wrapper).toMatchSnapshot();
+    const children = getByText("children");
+    expect(children).toBeInTheDocument();
   });
 });

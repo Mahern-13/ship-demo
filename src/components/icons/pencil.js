@@ -8,6 +8,7 @@ function PencilIcon({ size, onClick, disabled }) {
   return (
     <Wrapper disabled={disabled} onClick={onClick} styling={{ padding: "0" }}>
       <svg
+        data-testid="pencil-icon-id"
         disabled={disabled}
         height={`${size}pt`}
         width={`${size}pt`}

@@ -1,11 +1,15 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { render } from "@testing-library/react";
+import { Provider } from "react-redux";
+import store from "../../store";
 import App from "./index";
 
 describe("App", () => {
-  const wrapper = shallow(<App />);
-
-  it("renders the app", () => {
-    expect(wrapper.exists()).toBe(true);
+  it("renders the app without crashing", () => {
+    render(
+      <Provider store={store()}>
+        <App />
+      </Provider>
+    );
   });
 });

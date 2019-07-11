@@ -14,8 +14,7 @@ const CONFIG = {
   danger: {
     cancelBtnText: "Cancel",
     primaryBtnText: "Retry",
-    message: message =>
-      `(${message}) We're sorry, there was an error processing your request.`
+    message: message => message
   }
 };
 
@@ -56,13 +55,14 @@ const BaseAlert = ({
             onClick={() => onSecondaryClick(alertType)}
           />
         </Wrapper>
-        <Wrapper styling={{ padding: "0px 5px" }}>
-          <PrimaryButton
-            text={CONFIG[alertType].primaryBtnText}
-            onClick={() => onPrimaryClick(alertType)}
-            disabled={JSON.stringify(message).indexOf("ValidationError") > -1}
-          />
-        </Wrapper>
+        {message.toString().slice(-22) !== "is not a valid address" && (
+          <Wrapper styling={{ padding: "0px 5px" }}>
+            <PrimaryButton
+              text={CONFIG[alertType].primaryBtnText}
+              onClick={() => onPrimaryClick(alertType)}
+            />
+          </Wrapper>
+        )}
       </Wrapper>
     </Wrapper>
   );

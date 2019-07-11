@@ -1,83 +1,87 @@
 import React from "react";
 import { Danger, Default, Primary, Warning } from "./index";
-import { shallow } from "enzyme";
 import { SIZES } from "../../consts";
-
-const clickFn = jest.fn();
+import { render, fireEvent } from "@testing-library/react";
 
 describe("Default", () => {
-  it("renders the component", () => {
-    const wrapper = shallow(<Default onClick={clickFn} text="text" />).dive();
-    wrapper
-      .find("button")
-      .first()
-      .simulate("click");
+  it("handles a click", () => {
+    const clickFn = jest.fn();
 
-    expect(wrapper.exists()).toBe(true);
+    const { getByText } = render(<Default onClick={clickFn} text="text" />);
+
+    const defaultButton = getByText("text");
+    fireEvent.click(defaultButton);
+
     expect(clickFn).toHaveBeenCalled();
-    expect(wrapper).toMatchSnapshot();
   });
 
-  it("renders the component", () => {
-    const wrapper = shallow(
-      <Default onClick={() => "clicked"} text="text" disabled={true} />
+  it("handles a click on a size specific button", () => {
+    const clickFn = jest.fn();
+
+    const { getByText } = render(
+      <Default onClick={clickFn} text="text" buttonSize={SIZES.LARGE} />
     );
 
-    expect(wrapper).toMatchSnapshot();
+    const largeButton = getByText("text");
+    fireEvent.click(largeButton);
+
+    expect(clickFn).toHaveBeenCalled();
   });
 
-  it("renders the component with SMALL styling", () => {
-    const wrapper = shallow(
-      <Default onClick={() => "clicked"} text="text" buttonSize={SIZES.SMALL} />
-    );
+  it("rejects a click on a disabled button", () => {
+    const clickFn = jest.fn();
 
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it("renders the component with MEDIUM styling", () => {
-    const wrapper = shallow(
+    const { getByText } = render(
       <Default
-        onClick={() => "clicked"}
+        onClick={clickFn}
         text="text"
-        buttonSize={SIZES.MEDIUM}
+        buttonSize={SIZES.SMALL}
+        disabled={true}
       />
     );
 
-    expect(wrapper).toMatchSnapshot();
-  });
+    const disabledButton = getByText("text");
+    fireEvent.click(disabledButton);
 
-  it("renders the component with LARGE styling", () => {
-    const wrapper = shallow(
-      <Default onClick={() => "clicked"} text="text" buttonSize={SIZES.LARGE} />
-    );
-
-    expect(wrapper).toMatchSnapshot();
-  });
-});
-
-describe("Primary", () => {
-  const wrapper = shallow(<Primary onClick={() => "clicked"} text="text" />);
-
-  it("renders the component", () => {
-    expect(wrapper.exists()).toBe(true);
-    expect(wrapper).toMatchSnapshot();
-  });
-});
-
-describe("Warning", () => {
-  const wrapper = shallow(<Warning onClick={() => "clicked"} text="text" />);
-
-  it("renders the component", () => {
-    expect(wrapper.exists()).toBe(true);
-    expect(wrapper).toMatchSnapshot();
+    expect(clickFn).toHaveBeenCalledTimes(0);
   });
 });
 
 describe("Danger", () => {
-  const wrapper = shallow(<Danger onClick={() => "clicked"} text="text" />);
+  it("handles a click", () => {
+    const clickFn = jest.fn();
 
-  it("renders the component", () => {
-    expect(wrapper.exists()).toBe(true);
-    expect(wrapper).toMatchSnapshot();
+    const { getByText } = render(<Danger onClick={clickFn} text="text" />);
+
+    const dangerButton = getByText("text");
+    fireEvent.click(dangerButton);
+
+    expect(clickFn).toHaveBeenCalled();
+  });
+});
+
+describe("Primary", () => {
+  it("handles a click", () => {
+    const clickFn = jest.fn();
+
+    const { getByText } = render(<Primary onClick={clickFn} text="text" />);
+
+    const primaryButton = getByText("text");
+    fireEvent.click(primaryButton);
+
+    expect(clickFn).toHaveBeenCalled();
+  });
+});
+
+describe("Warning", () => {
+  it("handles a click", () => {
+    const clickFn = jest.fn();
+
+    const { getByText } = render(<Warning onClick={clickFn} text="text" />);
+
+    const warningButton = getByText("text");
+    fireEvent.click(warningButton);
+
+    expect(clickFn).toHaveBeenCalled();
   });
 });

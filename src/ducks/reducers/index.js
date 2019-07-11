@@ -31,6 +31,7 @@ const _setEditingStep = (state, { id }) => {
 
 const _createStop = (state, { stop, alert, error }) => {
   const createdId = uuidv4();
+  const updatedEditId = stop.verified ? null : createdId;
   const newState = updateObj(state, {
     stops: updateObj(state.stops, {
       [createdId]: updateObj(stop, { id: createdId })
@@ -38,7 +39,7 @@ const _createStop = (state, { stop, alert, error }) => {
     routes: [...state.routes, createdId],
     alert,
     error,
-    editingStepId: createdId,
+    editingStepId: updatedEditId,
     didAddRoute: true
   });
   return newState;

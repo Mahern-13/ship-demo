@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Alert renders the component 1`] = `ShallowWrapper {}`;
-
-exports[`Error renders the component 1`] = `ShallowWrapper {}`;

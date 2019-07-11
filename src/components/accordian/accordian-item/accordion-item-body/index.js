@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import Wrapper from "../../../wrapper";
 
 export const AccordionItemBody = React.forwardRef(
@@ -28,4 +28,4 @@ export const AccordionItemBody = React.forwardRef(
   }
 );
 
-export default AccordionItemBody;
+export default memo(AccordionItemBody);

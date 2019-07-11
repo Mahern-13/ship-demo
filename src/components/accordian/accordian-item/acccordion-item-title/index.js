@@ -1,7 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 import Wrapper from "../../../wrapper";
 
-export default function AccordionItemTitle({ className, expanded, title, id }) {
+const AccordionItemTitle = ({ className, expanded, title, id }) => {
   const style = {
     cursor: "pointer",
     margin: 0
@@ -25,4 +25,6 @@ export default function AccordionItemTitle({ className, expanded, title, id }) {
       {title}
     </Wrapper>
   );
-}
+};
+
+export default memo(AccordionItemTitle);

@@ -44,6 +44,7 @@ const EditStop = ({
   onCancel,
   editingStepId
 }) => {
+  console.log("im in this shit", stop);
   const { form, onChange } = useForm({
     formName: stop.name,
     formAddress: stop.address
@@ -55,6 +56,7 @@ const EditStop = ({
 
   const _onSubmitForm = () => {
     const stopWithForm = { ...stop, name: formName, address: formAddress };
+    console.log("Hey, I'm stop with form", stopWithForm);
     dispatch(initUpdateStop(stopWithForm));
   };
 
@@ -98,7 +100,7 @@ const EditStop = ({
           <Wrapper>
             <TextInput
               id="stop-name-input"
-              label="Name"
+              label="Stop Name"
               type="text"
               name="formName"
               value={formName}
@@ -108,7 +110,7 @@ const EditStop = ({
           <Wrapper styling={{ flexGrow: "2" }}>
             <TextInput
               id="stop-address-input"
-              label="Address"
+              label="Stop Address"
               type="text"
               name="formAddress"
               value={formAddress}
