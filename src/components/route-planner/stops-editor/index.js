@@ -34,7 +34,10 @@ const StopsEditor = () => {
       }, 350);
     }
   }, [routes.length]);
-  const toggleEdit = useCallback(id => {
+  const toggleEdit = useCallback((id, disabled) => {
+    if (disabled) {
+      return;
+    }
     dispatch(setEditingStep(id));
   });
 
@@ -42,7 +45,10 @@ const StopsEditor = () => {
     dispatch(setEditingStep(id));
   });
 
-  const _onDelete = useCallback(id => {
+  const _onDelete = useCallback((id, disabled) => {
+    if (disabled) {
+      return;
+    }
     dispatch(deleteStop(id));
   });
 
