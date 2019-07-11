@@ -6,9 +6,10 @@ const disabledFill = DISABLED_COLOR;
 
 function TrashIcon({ size, onClick, disabled }) {
   return (
-    <Wrapper disabled={disabled} onClick={onClick} styling={{ padding: "0" }}>
+    <Wrapper disabled={disabled} styling={{ padding: "0" }}>
       <svg
         data-testid="trash-icon-id"
+        onClick={onClick}
         disabled={disabled}
         height={`${size}pt`}
         viewBox={`-48 0 512 512`}

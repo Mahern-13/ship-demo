@@ -85,25 +85,31 @@ const _completionOfStop = (state, { stop }) => {
 const _setDidAddRoute = (state, { bool }) =>
   updateObj(state, { didAddRoute: bool });
 
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case Types.editingStep:
-      return _setEditingStep(state, action);
-    case Types.completionOfStop:
-      return _completionOfStop(state, action);
-    case Types.createStop:
-      return _createStop(state, action);
-    case Types.updateStop:
-      return _updateStop(state, action);
-    case Types.deleteStop:
-      return _deleteStop(state, action);
-    case Types.creatingStopState:
-      return _setCreatingStopState(state, action);
-    case Types.setDidAddRoute:
-      return _setDidAddRoute(state, action);
-    default:
-      return state;
-  }
-};
-
-export default reducer;
+export default function(initial) {
+  return (
+    state = {
+      ...initialState,
+      ...initial
+    },
+    action
+  ) => {
+    switch (action.type) {
+      case Types.editingStep:
+        return _setEditingStep(state, action);
+      case Types.completionOfStop:
+        return _completionOfStop(state, action);
+      case Types.createStop:
+        return _createStop(state, action);
+      case Types.updateStop:
+        return _updateStop(state, action);
+      case Types.deleteStop:
+        return _deleteStop(state, action);
+      case Types.creatingStopState:
+        return _setCreatingStopState(state, action);
+      case Types.setDidAddRoute:
+        return _setDidAddRoute(state, action);
+      default:
+        return state;
+    }
+  };
+}

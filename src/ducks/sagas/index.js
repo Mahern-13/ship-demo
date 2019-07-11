@@ -64,7 +64,6 @@ function* initUpdateStop({ stop }) {
       verifyAddress(stop.address)
     );
 
-    console.log("initUpdate", response, error);
     // Error
     if (error) {
       stopError = error;

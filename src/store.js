@@ -3,10 +3,13 @@ import { createStore, applyMiddleware } from "redux";
 import reducer from "./ducks/reducers";
 import rootSaga from "./ducks/sagas";
 
-export default function() {
+export default function(initialState) {
   const sagaMiddleware = createSagaMiddleware();
 
-  const store = createStore(reducer, applyMiddleware(sagaMiddleware));
+  const store = createStore(
+    reducer(initialState),
+    applyMiddleware(sagaMiddleware)
+  );
   sagaMiddleware.run(rootSaga);
   return store;
 }

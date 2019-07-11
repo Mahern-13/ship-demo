@@ -6,7 +6,7 @@ const TextInput = props => {
   const { id, label, value, onChange, name, disabled } = props;
   const fieldClassName = `field ${(active || value) && "active"}`;
   return (
-    <div className={fieldClassName}>
+    <div data-testid="text-input" className={fieldClassName}>
       <input
         id={id}
         type="text"
