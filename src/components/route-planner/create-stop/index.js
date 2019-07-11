@@ -52,7 +52,6 @@ const CreateStop = () => {
 
   const _isFormValid = address => {
     let valid = true;
-    console.log("address", address.trim.length < 3);
     if (address.trim().length < 3) {
       setAddressError(true);
       valid = false;
@@ -64,10 +63,8 @@ const CreateStop = () => {
   };
 
   const _onSubmitForm = () => {
-    console.log(isCreatingStop);
     if (isCreatingStop) return;
     const isFormValid = _isFormValid(address);
-    console.log(isFormValid);
     if (!isFormValid) return;
     dispatch(initCreateStop(name, address));
   };
