@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export function verifyAddress(address) {
-  const url = "https://dev-api.shipwell.com/v2/locations/addresses/validate/";
+  const url = `${process.env.SHIPWELL_URL}`;
 
   return axios
     .post(

@@ -1,6 +1,15 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
+const webpack = require("webpack");
+const dotenv = require("dotenv");
+
+const env = dotenv.config().parsed;
+
+const envKeys = Object.keys(env).reduce((prev, next) => {
+  prev[`process.env.${next}`] = JSON.stringify(env[next]);
+  return prev;
+}, {});
 
 module.exports = {
   entry: ["babel-polyfill", "./src/index.js"],
@@ -42,6 +51,7 @@ module.exports = {
     }),
     new ScriptExtHtmlWebpackPlugin({
       defaultAttribute: "defer"
-    })
+    }),
+    new webpack.DefinePlugin(envKeys)
   ]
 };
