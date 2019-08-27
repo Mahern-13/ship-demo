@@ -42,7 +42,7 @@ const AccordionItem = props => {
   };
 
   useEffect(() => {
-    // Component mounded
+    // Component mounted
     updateMaxHeight(false);
     // componentWillUnmount
     return () => {

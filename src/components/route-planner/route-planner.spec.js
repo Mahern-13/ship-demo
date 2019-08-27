@@ -93,25 +93,12 @@ describe("RoutePlanner", () => {
       </Provider>
     );
 
-    // const checkClass = (testId, label) => {
-    //   const inputs = getAllByTestId(testId);
-
-    //   const input = inputs.find(input => queryByLabelText(input, label));
-    //   return input;
-    // };
-
     const nameInput = getByLabelText("Name");
-    //fireEvent.focus(nameInput);
-
-    //expect(checkClass("text-input", "Name")).toHaveClass("active");
 
     fireEvent.change(nameInput, { target: { value: "test" } });
-    //fireEvent.blur(nameInput);
 
     const addressInput = getByLabelText("Address");
     fireEvent.focus(addressInput);
-
-    //expect(checkClass("text-input", "Name")).not.toHaveClass("active")
 
     fireEvent.change(addressInput, { target: { value: "1 Jackson Blvd" } });
 

@@ -1,7 +1,3 @@
-// import { shallow } from "enzyme";
-// import React from "react";
-// import { Default, Primary, Warning, Danger } from "./index";
-
 import React from "react";
 import { Primary } from "./index";
 import { render, fireEvent } from "@testing-library/react";
