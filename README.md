@@ -20,7 +20,8 @@ Need yarn or npm
 
 ```
 1. Clone the repo
-2. `yarn`
+2. Create .env file w/ SHIPWELL_URL=https://dev-api.shipwell.com/v2/locations/addresses/validate/
+3. `yarn`
 ```
 
 ## Running the tests
