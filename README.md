@@ -32,6 +32,6 @@ Need yarn or npm
 
 The tests focus on integration testing, using `@testing-library/react` as this offers a bit more customization and mirrors functional proof more than unit testing.
 
-## Deployment
+## Run locally
 
 `yarn start`
