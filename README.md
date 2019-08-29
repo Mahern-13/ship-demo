@@ -1,4 +1,4 @@
-# Working Demo For ShipWell Front End Project
+# Working Demo For Shipping Scheduler
 
 This app is a scalable mock app for creating and editing route stops. This latest commit includes all working fixes.
 
@@ -34,4 +34,3 @@ The tests focus on integration testing, using `@testing-library/react` as this o
 ## Deployment
 
 `yarn start`
-
